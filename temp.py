@@ -1,8 +1,11 @@
 import Adafruit_DHT as dht
-import time
 import pins
 import sys
 
+from time import localtime, strftime, sleep
+
+
+TIMEFORMAT = '%H:%M:%S'
 PIN = pins.load()['dht22']
 
 def temp():
@@ -13,14 +16,20 @@ def hmd():
     h = dht.read_retry(dht.DHT22, PIN)[0]
     return round(h, 1)
 
-def test():
-    print('Press Ctrl+C to cancel\n\n')
+def terminalPrint():
+    tempdisplay = (str(temp()) + "ºc\n" + str(hmd()) + "%")
+    timedisplay = strftime(TIMEFORMAT, localtime()) + '\n'
+    sys.stdout.write('\r' + timedisplay + tempdisplay + '\033[2A')
+    sys.stdout.flush()
+
+
+def testloop():
+    print('Press Ctrl+C to cancel\n\n\n')
     while True:
-        display = (str(temp()) + "ºc\n" + str(hmd()) + "%")
-        sys.stdout.write('\033[1A \r' + display)
-        sys.stdout.flush()
-        time.sleep(1)
+        terminalPrint()
+        sleep(1)
+        
 
 if __name__ == '__main__':
-    test()
+    testloop()
     exit()
