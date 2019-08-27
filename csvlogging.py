@@ -14,8 +14,11 @@ def returnCleanSheet():
     with open('csvlog.csv', 'r') as csvFile:
         oldsheet = list(csv.reader(csvFile))
         for row in oldsheet:
-            if float(row[1]) > time() - 60*60*TRASHTIME:
-                newSheet.append(row) 
+            try:
+                if float(row[1]) > time() - 60*60*TRASHTIME:
+                    newSheet.append(row)
+            except ValueError:
+                continue
     return newSheet
 
 def logCurrent():
