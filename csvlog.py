@@ -4,7 +4,7 @@ import csv
 
 LOGINTERVAL = 1 #secs
 TIMEFORMAT = '%d/%m/%Y %H:%M:%S'
-TRASHTIME = 60*60*72 #Hours of data to be retained
+TRASHTIME = 72 #Hours of data to be retained
 HEADERS = ['DateTime', 'Unix', 'Temp ºC', 'Humidity %']
 
 sheet = csv.writer(open('csvlog.csv', 'a'), delimiter=',')
@@ -14,7 +14,7 @@ def returnCleanSheet():
     with open('csvlog.csv', 'r') as csvFile:
         oldsheet = list(csv.reader(csvFile))
         for row in oldsheet:
-            if float(row[1]) > time() - TRASHTIME:
+            if float(row[1]) > time() - 60*60*TRASHTIME:
                 newSheet.append(row) 
     return newSheet
 
