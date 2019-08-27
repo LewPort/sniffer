@@ -4,11 +4,27 @@ import csv
 
 LOGINTERVAL = 1 #secs
 TIMEFORMAT = '%d/%m/%Y %H:%M:%S'
-TRASHTIME = 60*60*24 #24 Hours
+TRASHTIME = 60*60*72 #Hours of data to be retained
+HEADERS = ['DateTime', 'Unix', 'Temp ºC', 'Humidity %']
 
 sheet = csv.writer(open('csvlog.csv', 'a'), delimiter=',')
 
-def log():
+def returnCleanSheet():
+    newSheet = []
+    with open('csvlog.csv', 'r') as csvFile:
+        oldsheet = list(csv.reader(csvFile))
+        for row in oldsheet:
+            if float(row[1]) > time() - TRASHTIME:
+                newSheet.append(row) 
+    return newSheet
+
+def logCurrent():
+    newSheet = returnCleanSheet()
+    with open('csvlog.csv', 'w') as csvFile:
+        sheet = csv.writer(csvFile, delimiter=',')
+        sheet.writerow(HEADERS)
+        for row in newSheet:
+            sheet.writerow(row)
     with open('csvlog.csv', 'a') as csvFile:
         sheet = csv.writer(csvFile, delimiter=',')
         sheet.writerow([strftime(TIMEFORMAT,localtime()),
@@ -16,13 +32,13 @@ def log():
                         temp.temp(),
                         temp.hmd()])
 
-def logloop():
+def displayLoop():
     print('Logging:')
     while True:
-        log()
+        logCurrent()
         temp.terminalPrint()
         sleep(LOGINTERVAL)
 
 if __name__ == '__main__':
-    log()
+    logCurrent()
 
