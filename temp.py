@@ -19,12 +19,12 @@ def hmd():
 def terminalPrint():
     tempdisplay = (str(temp()) + "ºc\n" + str(hmd()) + "%")
     timedisplay = strftime(TIMEFORMAT, localtime()) + '\n'
-    sys.stdout.write('\r' + timedisplay + tempdisplay + '\033[2A')
+    sys.stdout.write(timedisplay + tempdisplay + '\033[2A \r')
     sys.stdout.flush()
 
 
 def testloop():
-    print('Press Ctrl+C to cancel\n\n\n')
+    print('Press Ctrl+C to cancel\n')
     while True:
         terminalPrint()
         sleep(1)

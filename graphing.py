@@ -1,29 +1,27 @@
+from time import strftime, strptime, localtime, time
 from matplotlib import pyplot as plt
 from matplotlib import dates as mpl_dates
 import csvlogging
-from time import strftime, strptime, localtime
 import datetime
+import random
 import csv
 
 CSVFILE = 'csvlog.csv'
 T_COLOUR = '#e0474c'
 H_COLOUR = '#7acfd6'
-plt.style.use('seaborn')
+GRAPHING_PERIOD = 72
+plt.style.use('dark_background')
 
 def returnListFromCSV(CSVFILE):
-    newList = []
+    new_list = []
     with open(CSVFILE, 'r') as csvFile:
-        newList = list(csv.reader(csvFile))
-    return newList
-
-##def shortTime(time):
-##    time = float(time)
-##    try:
-##        shortened_time = strftime("%a %H", localtime(time))
-##    except ValueError:
-##        pass
-##    strpd = strptime(shortened_time, "%a %H")
-##    return dates.date2num(strpd)
+        for row in csv.reader(csvFile):
+            try:
+                if float(row[1]) > time() - 60*60*GRAPHING_PERIOD:
+                    new_list.append(row)
+            except ValueError:
+                continue 
+    return new_list
 
 DATA_LIST = returnListFromCSV(CSVFILE)
 
@@ -48,7 +46,7 @@ humidline = ax2.plot_date(datetime_x, humid_y,
 ax2.set_ylim([0,100])
 
 
-plt.title('Temperature and Humidity Over %s Hours' % csvlogging.TRASHTIME)
+plt.title('Temperature and Humidity Over %s Hours' % GRAPHING_PERIOD)
 ax1.set_xlabel('Day & Time')
 ax1.set_ylabel('Temperature ºc')
 ax2.set_ylabel('Humidity %')
@@ -58,14 +56,15 @@ ax2.legend(loc=1)
 
 
 
-ax1.grid(False)
+ax1.grid(True)
 ax2.grid(False)
 plt.tight_layout()
 plt.gcf().autofmt_xdate()
 date_format = mpl_dates.DateFormatter('%a %H:%M')
 plt.gca().xaxis.set_major_formatter(date_format)
 
-def export(name='graph.png'):
+def export(name='./static/graph.png?' + str(random.randint(1,9999999))):
+##    os.system('rm ./static/graph.png*')                                            
     plt.savefig(name)
 
 if __name__ == '__main__':

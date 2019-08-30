@@ -1,0 +1,64 @@
+body {
+    background-color: #001c2b;
+    color: white;
+    font-family: Arial;
+    padding: 5vh 5vw;
+    letter-spacing: 5px;
+    text-align: center;
+    font-size: 30px;
+    }
+
+h3 {
+    margin: 5px;
+}
+
+.datetime {
+    color: grey;
+    font-family: Arial;
+    letter-spacing: 1px;
+    text-align: center;
+    font-size: 10px;
+    margin: 1px;
+    }
+
+#switch {
+    background-color: #0178aa;
+    width: 80vw;
+    margin: 10px 0px;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 30px;
+    text-transform: uppercase;
+    }
+
+#timerinput {
+    width: 50vw;
+    color: inherit;
+    font-family: inherit;
+    background-color: inherit;
+    text-align: inherit;
+    font-size: 30px;
+    border: 0;
+    border-bottom: 3px solid gray;
+    }
+
+#conditionstable {
+    margin: 0 auto;
+    text-align: center;
+}
+
+#conditionsicons {
+    padding: 10px;
+    margin: 5px;
+    width: 150px;
+    height: 150px;
+}
+
+#graph {
+    padding: 50px;
+    width: 80vw;
+}
