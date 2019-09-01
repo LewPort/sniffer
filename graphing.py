@@ -58,12 +58,12 @@ ax2.legend(loc=1)
 
 ax1.grid(True)
 ax2.grid(False)
-plt.tight_layout()
+#plt.tight_layout()
 plt.gcf().autofmt_xdate()
 date_format = mpl_dates.DateFormatter('%a %H:%M')
 plt.gca().xaxis.set_major_formatter(date_format)
 
-def export(name='./static/graph.png?' + str(random.randint(1,9999999))):
+def export(name='./static/graph.png'):
 ##    os.system('rm ./static/graph.png*')                                            
     plt.savefig(name)
 
