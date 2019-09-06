@@ -46,7 +46,7 @@ humidline = ax2.plot_date(datetime_x, humid_y,
 ax2.set_ylim([0,100])
 
 
-plt.title('Temperature and Humidity Over %s Hours' % GRAPHING_PERIOD)
+plt.title('Indoor Temperature and Humidity Over %s Hours' % GRAPHING_PERIOD)
 ax1.set_xlabel('Day & Time')
 ax1.set_ylabel('Temperature ºc')
 ax2.set_ylabel('Humidity %')
@@ -58,14 +58,14 @@ ax2.legend(loc=1)
 
 ax1.grid(True)
 ax2.grid(False)
-#plt.tight_layout()
+plt.tight_layout()
 plt.gcf().autofmt_xdate()
 date_format = mpl_dates.DateFormatter('%a %H:%M')
 plt.gca().xaxis.set_major_formatter(date_format)
 
 def export(name='./static/graph.png'):
 ##    os.system('rm ./static/graph.png*')                                            
-    plt.savefig(name)
+    plt.savefig(name, transparent=True)
 
 if __name__ == '__main__':
     export()
