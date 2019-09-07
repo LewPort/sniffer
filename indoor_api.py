@@ -1,6 +1,7 @@
 import datetime, time
 import json
 import temp
+import sys
 import os
 
 _OUTPUT = './static/indoorCondAPI.json'
@@ -25,8 +26,19 @@ api = None
 ##write_json(api)
 
 while True:
-    api = get_current()
-    write_json(api)
-    time.sleep(1)
+    try:
+        api = get_current()
+        write_json(api)
+        time.sleep(1)
+    except KeyboardInterrupt:
+        exit()
+    except:
+        e = sys.exc_info()[0]
+        e = str(datetime.datetime.now()) + ": " + str(e) + "\n"
+        print(e)
+        with open('.indoor_api_error_log.txt', 'a') as error_log:
+            error_log.write(e)
+        continue
+    
     
 

@@ -47,7 +47,7 @@ ax2.set_ylim([0,100])
 
 
 plt.title('Indoor Temperature and Humidity Over %s Hours' % GRAPHING_PERIOD)
-ax1.set_xlabel('Day & Time')
+#ax1.set_xlabel('Day & Time')
 ax1.set_ylabel('Temperature ºc')
 ax2.set_ylabel('Humidity %')
 ax1.legend(loc=2)
