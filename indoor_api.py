@@ -33,7 +33,7 @@ while True:
     except KeyboardInterrupt:
         exit()
     except:
-        e = sys.exc_info()[0]
+        e = sys.exc_info()
         e = str(datetime.datetime.now()) + ": " + str(e) + "\n"
         print(e)
         with open('.indoor_api_error_log.txt', 'a') as error_log:

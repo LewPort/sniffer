@@ -9,11 +9,15 @@ TIMEFORMAT = '%H:%M:%S'
 PIN = pins.load()['dht22']
 
 def temp():
-    temp = dht.read_retry(dht.DHT22, PIN)[1]
+    temp = None
+    while temp is None:
+        temp = dht.read_retry(dht.DHT22, PIN)[1]
     return round(temp, 1)
 
 def hmd():
-    h = dht.read_retry(dht.DHT22, PIN)[0]
+    h = None
+    while h is None:
+        h = dht.read_retry(dht.DHT22, PIN)[0]
     return round(h, 1)
 
 def terminalPrint():

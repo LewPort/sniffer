@@ -3,7 +3,7 @@ import urllib.request
 import json
 
 _URL = "http://api.openweathermap.org/data/2.5/weather?q=Hamilton&units=metric&APPID=677f6b056af14113e02f38ae1b18f342"
-_OUTPUT = "./static/outdoorCondAPI.json"
+_FILE = "./static/outdoorCondAPI.json"
 
 def get_data():
     try:
@@ -48,8 +48,15 @@ def return_current(data):
 
 def write_json(api):
     if api:
-        with open(_OUTPUT, 'w') as outfile:
+        with open(_FILE, 'w') as outfile:
             json.dump(api, outfile)
+    else:
+        print('No API data downloaded from server')
+
+def read_json():
+    with open(_FILE) as raw_json:
+        json_data = str(json.load(raw_json))
+        return eval(json_data)
 
 api = None
 api = return_current(get_data())
