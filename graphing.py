@@ -10,7 +10,7 @@ INDOOR_CSVFILE = 'csvlog.csv'
 OUTDOOR_CSVFILE = 'outdoor_csvlog.csv'
 INDOOR_COLOUR = '#e0474c'
 OUTDOOR_COLOUR = '#7acfd6'
-GRAPHING_PERIOD = 72
+GRAPHING_PERIOD = 24
 plt.style.use('dark_background')
 
 def returnListFromCSV(CSVFILE):
