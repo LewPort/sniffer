@@ -12,6 +12,14 @@ h3 {
     margin: 5px;
 }
 
+#cam {
+    text-align: center;
+    width:90vw;
+    max-width: 640px;
+    border: none;
+    padding: 20px 0;
+}
+
 .datetime {
     color: grey;
     font-family: Arial;
@@ -59,9 +67,10 @@ h3 {
 }
 
 #graph {
-    padding: 10px;
+    padding: 10px 0;
     margin: 5px;
-    width: 50vw;
+    width: 90vw;
+    max-width: 640px;
     min-width: 300px;
     text-align: inherit;
 }
